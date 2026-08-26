@@ -1,0 +1,10 @@
+# Artefactos de simulación en cualquier subproyecto
+**/sim_build/
+**/results.xml
+**/*.vcd
+**/*.fst
+**/*.vvp
+
+# Caché de Python
+**/__pycache__/
+**/*.py[cod]

@@ -1,0 +1,1 @@
+cocotb-config --version
