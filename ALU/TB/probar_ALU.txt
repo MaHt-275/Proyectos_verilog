@@ -1,0 +1,18 @@
+Probar todo el sistema (alu_top):
+Bash
+make
+# o también:
+make test_top
+Probar un submódulo específico de forma aislada:
+Bash
+make test_logic
+make test_arithmetic
+make test_shifter
+Ejecutar la suite completa de pruebas en cadena:
+
+Bash
+make all
+Limpiar archivos generados tras las simulaciones:
+
+Bash
+make clean
