@@ -1,2 +1,2 @@
-escribir: make TOPLEVEL=modulo a probar MODULE= TB del modulo a probar
+escribir: make TOPLEVEL=modulo a probar COCOTB_TEST_MODULES= TB del modulo a probar
 Importarte tener mismas rutas que en este GIT
