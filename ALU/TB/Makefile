@@ -7,7 +7,7 @@ SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 
 #indicar direcciones de los archivos fuente y de testbench
-direccion_RTL =$(CURDIR)../RTL #le decimos que vuelva un paso atras y busque la carpeta RTL
+direccion_RTL =$(CURDIR)/../RTL #le decimos que vuelva un paso atras y busque la carpeta RTL
 VERILOG_SOURCES = $(wildcard $(direccion_RTL)/*.v) #indico que todos los archivos .v de la carpeta RTL son fuentes de verilog
 #Ya estoy en la carpeta TB, asi que no necesito volver un paso atras para buscar los archivos de testbench
 
