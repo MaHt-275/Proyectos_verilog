@@ -12,8 +12,8 @@ async def test_arithmetic(dut):
     a=random.randint(0, 255) #entrada A aleatoria
     b=random.randint(0, 255) #entrada B aleatoria
     c_in=0 #Carry In en 0
-    dut.a_in.value=a #asignar valor a la entrada A
-    dut.b_in.value=b #asignar valor a la entrada B
+    dut.in_a.value=a #asignar valor a la entrada A
+    dut.in_b.value=b #asignar valor a la entrada B
     dut.carry_in.value=c_in #asignar valor a la entrada Carry_In
     dut.mod_sub.value=0 #asignar valor a la entrada mod_sub
     await Timer(10, units='ns') #esperar 10 ns para que se propague la señal
@@ -31,8 +31,8 @@ async def test_arithmetic(dut):
     a=random.randint(0, 255) #entrada A aleatoria
     b=random.randint(0, 255) #entrada B aleatoria
     c_in=1 #Carry In en 1
-    dut.a_in.value=a 
-    dut.b_in.value=b 
+    dut.in_a.value=a 
+    dut.in_b.value=b 
     dut.carry_in.value=c_in 
     dut.mod_sub.value=0 
     await Timer(10, units='ns')
@@ -47,8 +47,8 @@ async def test_arithmetic(dut):
     a=random.randint(-128, 127) #cambio los limites al ser un bit de signo
     b=random.randint(-128, 127) 
     c_in=1 
-    dut.a_in.value=a 
-    dut.b_in.value=b 
+    dut.in_a.value=a 
+    dut.in_b.value=b 
     dut.carry_in.value=c_in 
     dut.mod_sub.value=1
     await Timer(10, units='ns') 
@@ -63,8 +63,8 @@ async def test_arithmetic(dut):
     a=random.randint(-128, 127) #cambio los limites al ser un bit de signo
     b=random.randint(-128, 127) 
     c_in=0 
-    dut.a_in.value=a 
-    dut.b_in.value=b 
+    dut.in_a.value=a 
+    dut.in_b.value=b 
     dut.carry_in.value=c_in 
     dut.mod_sub.value=1
     await Timer(10, units='ns') 
