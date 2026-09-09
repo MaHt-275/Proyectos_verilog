@@ -14,7 +14,7 @@ VERILOG_SOURCES = ../RTL/arithmetic.v\
                   ../RTL/alu_top.v
 #iniciar la conexion con los TB
 TOPLEVEL ?= alu_top #el ?= indica que no es un valor fijo, de esta manera puedo cambiarlo desde la linea de comandos si quiero
-MODULE ?= test_alu_top
+COCOTB_TEST_MODULES ?= test_alu_top
 
 #digo que usare cocotb para la simulacion y que busque el makefile de cocotb en la carpeta donde se instalo
 include $(shell cocotb-config --makefiles)/Makefile.sim 

@@ -16,7 +16,7 @@ async def test_arithmetic(dut):
     dut.in_b.value=b #asignar valor a la entrada B
     dut.carry_in.value=c_in #asignar valor a la entrada Carry_In
     dut.mod_sub.value=0 #asignar valor a la entrada mod_sub
-    await Timer(10, units='ns') #esperar 10 ns para que se propague la señal
+    await Timer(10, unit='ns') #esperar 10 ns para que se propague la señal
     #Verificar la salida de la suma
     #calculamos la suma real
     suma_real=(a+b+c_in) & 0xFF #truncar a 8bits
@@ -24,7 +24,7 @@ async def test_arithmetic(dut):
     #Verificamos que la salida del DUT sea igual a la suma real
     assert dut.arit_out.value == suma_real, f"Error en la suma: {a} + {b} + {c_in} = {suma_real}, pero dio {dut.arit_out.value}"
     assert dut.carry_out.value == R_carry, f"Error en el Carry Out, el esperado es {R_carry}, pero dio {dut.carry_out.value}"
-    await Timer(50, units='ns') 
+    await Timer(50, unit='ns') 
     # ==========================================
     # CASO 2: Suma aleatoria con Carry In = 0
     # ==========================================
@@ -35,12 +35,12 @@ async def test_arithmetic(dut):
     dut.in_b.value=b 
     dut.carry_in.value=c_in 
     dut.mod_sub.value=0 
-    await Timer(10, units='ns')
+    await Timer(10, unit='ns')
     suma_real=(a+b+c_in) & 0xFF
     R_carry=0 if (a+b+c_in) <= 255 else 1
     assert dut.arit_out.value == suma_real, f"Error en la suma: {a} + {b} + {c_in} = {suma_real}, pero dio {dut.arit_out.value}"
     assert dut.carry_out.value == R_carry, f"Error en el Carry Out, el esperado es {R_carry}, pero dio {dut.carry_out.value}"
-    await Timer(50, units='ns')
+    await Timer(50, unit='ns')
     # ==========================================
     # CASO 3: resta aleatoria con Carry In = 1
     # ==========================================
@@ -51,12 +51,12 @@ async def test_arithmetic(dut):
     dut.in_b.value=b 
     dut.carry_in.value=c_in 
     dut.mod_sub.value=1
-    await Timer(10, units='ns') 
+    await Timer(10, unit='ns') 
     resta_real=(a-b) & 0xFF
     R_overflow=1 if (a-b) < -128 or (a-b) > 127 else 0
     assert dut.arit_out.value == resta_real, f"Error en la resta: {a} - {b} = {resta_real}, pero dio {dut.arit_out.value}"
     assert dut.overflow_flag.value == R_overflow, f"Error en el Overflow Out, el esperado es {R_overflow}, pero dio {dut.overflow_out.value}"
-    await Timer(50, units='ns')
+    await Timer(50, unit='ns')
     # ==========================================
     # CASO 4: resta aleatoria con Carry In = 0
     # ==========================================
@@ -67,9 +67,9 @@ async def test_arithmetic(dut):
     dut.in_b.value=b 
     dut.carry_in.value=c_in 
     dut.mod_sub.value=1
-    await Timer(10, units='ns') 
+    await Timer(10, unit='ns') 
     resta_real=(a-b-1) & 0xFF
     R_overflow=1 if (a-b-1) < -128 or (a-b-1) > 127 else 0
     assert dut.arit_out.value == resta_real, f"Error en la resta: {a} - {b} = {resta_real}, pero dio {dut.arit_out.value}"
     assert dut.overflow_flag.value == R_overflow, f"Error en el Overflow Out, el esperado es {R_overflow}, pero dio {dut.overflow_out.value}"
-    await Timer(50, units='ns')
+    await Timer(50, unit='ns')
