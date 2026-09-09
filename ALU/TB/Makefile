@@ -7,10 +7,11 @@ SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 
 #indicar direcciones de los archivos fuente y de testbench
-direccion_RTL =../RTL #le decimos que vuelva un paso atras y busque la carpeta RTL
-VERILOG_SOURCES = $(wildcard $(direccion_RTL)/*.v) #indico que todos los archivos .v de la carpeta RTL son fuentes de verilog
-#Ya estoy en la carpeta TB, asi que no necesito volver un paso atras para buscar los archivos de testbench
-
+direccion_RTL =$(CURDIR)/../RTL #le decimos que vuelva un paso atras y busque la carpeta RTL
+VERILOG_SOURCES = $(direccion_RTL)/arithmetic.v \
+                  $(direccion_RTL)/logic.v \
+                  $(direccion_RTL)/barrel_shifter.v \
+                  $(direccion_RTL)/alu_top.v \
 #iniciar la conexion con los TB
 TOPLEVEL ?= alu_top #el ?= indica que no es un valor fijo, de esta manera puedo cambiarlo desde la linea de comandos si quiero
 MODULE ?= test_alu_top
