@@ -6,9 +6,11 @@ from cocotb.triggers import Timer
 @cocotb.test() #Decorador para indicar que es un test
 async def test_arithmetic(dut):
     """Test para el modulo de aritmetica"""#comentario de la funcion visible para Cocotb
+  
     # ==========================================
     # CASO 1: Suma aleatoria con CarryIn = 0
     # ==========================================
+    """Caso 1 inicio"""
     a=random.randint(0, 255) #entrada A aleatoria
     b=random.randint(0, 255) #entrada B aleatoria
     c_in=0 #Carry In en 0
@@ -28,6 +30,7 @@ async def test_arithmetic(dut):
     # ==========================================
     # CASO 2: Suma aleatoria con Carry In = 0
     # ==========================================
+    """Caso 2 inicio"""
     a=random.randint(0, 255) #entrada A aleatoria
     b=random.randint(0, 255) #entrada B aleatoria
     c_in=1 #Carry In en 1
@@ -60,6 +63,7 @@ async def test_arithmetic(dut):
     # ==========================================
     # CASO 4: resta aleatoria con Carry In = 0
     # ==========================================
+    """Caso 4 inicio"""
     a=random.randint(-128, 127) #cambio los limites al ser un bit de signo
     b=random.randint(-128, 127) 
     c_in=0 
