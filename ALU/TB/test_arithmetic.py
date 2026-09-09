@@ -14,6 +14,7 @@ async def test_arithmetic(dut):
     a=random.randint(0, 255) #entrada A aleatoria
     b=random.randint(0, 255) #entrada B aleatoria
     c_in=0 #Carry In en 0
+    cocotb.log.info(f"[CASO 1] Operación: {a} + {b} + {c_in} (Mod_sub = 0)")
     dut.in_a.value=a #asignar valor a la entrada A
     dut.in_b.value=b #asignar valor a la entrada B
     dut.carry_in.value=c_in #asignar valor a la entrada Carry_In
@@ -34,6 +35,7 @@ async def test_arithmetic(dut):
     a=random.randint(0, 255) #entrada A aleatoria
     b=random.randint(0, 255) #entrada B aleatoria
     c_in=1 #Carry In en 1
+    cocotb.log.info(f"[CASO 2] Operación: {a} + {b} + {c_in} (Mod_sub = 0)")
     dut.in_a.value=a 
     dut.in_b.value=b 
     dut.carry_in.value=c_in 
@@ -50,7 +52,8 @@ async def test_arithmetic(dut):
     cocotb.log.info("Caso 3 inicio: Resta aleatoria con Carry In = 1")
     a=random.randint(-128, 127) #cambio los limites al ser un bit de signo
     b=random.randint(-128, 127) 
-    c_in=1 
+    c_in=1
+    cocotb.log.info(f"[CASO 3] Operación: {a} - {b} (Mod_sub = 1)")
     dut.in_a.value=a 
     dut.in_b.value=b 
     dut.carry_in.value=c_in 
@@ -68,6 +71,7 @@ async def test_arithmetic(dut):
     a=random.randint(-128, 127) #cambio los limites al ser un bit de signo
     b=random.randint(-128, 127) 
     c_in=0 
+    cocotb.log.info(f"[CASO 4] Operación: {a} - {b} - 1 (Mod_sub = 1)")
     dut.in_a.value=a 
     dut.in_b.value=b 
     dut.carry_in.value=c_in 
