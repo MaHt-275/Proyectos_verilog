@@ -10,7 +10,7 @@ async def test_arithmetic(dut):
     # ==========================================
     # CASO 1: Suma aleatoria con CarryIn = 0
     # ==========================================
-    """Caso 1 inicio"""
+    cocotb.log.info("Caso 1 inicio: Suma aleatoria con Carry In = 0")
     a=random.randint(0, 255) #entrada A aleatoria
     b=random.randint(0, 255) #entrada B aleatoria
     c_in=0 #Carry In en 0
@@ -30,7 +30,7 @@ async def test_arithmetic(dut):
     # ==========================================
     # CASO 2: Suma aleatoria con Carry In = 0
     # ==========================================
-    """Caso 2 inicio"""
+    cocotb.log.info("Caso 2 inicio: Suma aleatoria con Carry In = 1")
     a=random.randint(0, 255) #entrada A aleatoria
     b=random.randint(0, 255) #entrada B aleatoria
     c_in=1 #Carry In en 1
@@ -47,6 +47,7 @@ async def test_arithmetic(dut):
     # ==========================================
     # CASO 3: resta aleatoria con Carry In = 1
     # ==========================================
+    cocotb.log.info("Caso 3 inicio: Resta aleatoria con Carry In = 1")
     a=random.randint(-128, 127) #cambio los limites al ser un bit de signo
     b=random.randint(-128, 127) 
     c_in=1 
@@ -63,7 +64,7 @@ async def test_arithmetic(dut):
     # ==========================================
     # CASO 4: resta aleatoria con Carry In = 0
     # ==========================================
-    """Caso 4 inicio"""
+    cocotb.log.info("Caso 4 inicio: Resta aleatoria con Carry In = 0")
     a=random.randint(-128, 127) #cambio los limites al ser un bit de signo
     b=random.randint(-128, 127) 
     c_in=0 
