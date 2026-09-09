@@ -19,7 +19,7 @@ COCOTB_TEST_MODULES ?= test_alu_top
 #digo que usare cocotb para la simulacion y que busque el makefile de cocotb en la carpeta donde se instalo
 include $(shell cocotb-config --makefiles)/Makefile.sim 
 
-#NOTAS: Usar make TOPLEVEL=modulo a probar MODULE= TB del modulo a probar
+#NOTAS: Usar make TOPLEVEL=modulo a probar COCOTB_TEST_MODULES= TB del modulo a probar
 #de esta forma este Makefile es generico para el proyecto
 #===========================================================================#
 #						Makefile para ALU Testbench							#
