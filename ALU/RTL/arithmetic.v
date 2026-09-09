@@ -16,7 +16,7 @@ output reg overflow_flag
 reg [8:0] result; //Se declara un registro de 9 bits para almacenar el resultado de la operación aritmética//
 //incluyendo el bit de acarreo//
 wire [7:0] b_op; //Se declara un bus de 8 bits para almacenar el valor de entrada B modificado según el modo de operación//
-assign b_op = mod_sub ? ~in_b : in_b;//forma corta de un if/else, si esta activo el modo suma asignar este valor//
+assign b_op = mod_sub ? ~in_b : in_b;//forma corta de un if/else, si esta activo el modo resta asignar este valor//
 //b_op//
 
 always @(*)begin
