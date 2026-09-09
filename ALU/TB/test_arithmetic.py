@@ -25,6 +25,7 @@ async def test_arithmetic(dut):
     suma_real=(a+b+c_in) & 0xFF #truncar a 8bits
     R_carry=0 if (a+b+c_in) <= 255 else 1 #calcular el carry real
     #Verificamos que la salida del DUT sea igual a la suma real
+    cocotb.log.info(f"  -> [Esperado] Suma: {suma_real}, Carry: {R_carry} | [Obtenido DUT] Suma: {dut.arit_out.value}, Carry: {dut.carry_out.value}")
     assert dut.arit_out.value == suma_real, f"Error en la suma: {a} + {b} + {c_in} = {suma_real}, pero dio {dut.arit_out.value}"
     assert dut.carry_out.value == R_carry, f"Error en el Carry Out, el esperado es {R_carry}, pero dio {dut.carry_out.value}"
     await Timer(50, unit='ns') 
@@ -43,6 +44,7 @@ async def test_arithmetic(dut):
     await Timer(10, unit='ns')
     suma_real=(a+b+c_in) & 0xFF
     R_carry=0 if (a+b+c_in) <= 255 else 1
+    cocotb.log.info(f"  -> [Esperado] Suma: {suma_real}, Carry: {R_carry} | [Obtenido DUT] Suma: {dut.arit_out.value}, Carry: {dut.carry_out.value}")
     assert dut.arit_out.value == suma_real, f"Error en la suma: {a} + {b} + {c_in} = {suma_real}, pero dio {dut.arit_out.value}"
     assert dut.carry_out.value == R_carry, f"Error en el Carry Out, el esperado es {R_carry}, pero dio {dut.carry_out.value}"
     await Timer(50, unit='ns')
@@ -61,6 +63,7 @@ async def test_arithmetic(dut):
     await Timer(10, unit='ns') 
     resta_real=(a-b) & 0xFF
     R_overflow=1 if (a-b) < -128 or (a-b) > 127 else 0
+    cocotb.log.info(f"  -> [Esperado] Resta: {resta_real}, Overflow: {R_overflow} | [Obtenido DUT] Resta: {dut.arit_out.value}, Overflow: {dut.overflow_flag.value}")
     assert dut.arit_out.value == resta_real, f"Error en la resta: {a} - {b} = {resta_real}, pero dio {dut.arit_out.value}"
     assert dut.overflow_flag.value == R_overflow, f"Error en el Overflow Out, el esperado es {R_overflow}, pero dio {dut.overflow_out.value}"
     await Timer(50, unit='ns')
@@ -79,6 +82,7 @@ async def test_arithmetic(dut):
     await Timer(10, unit='ns') 
     resta_real=(a-b-1) & 0xFF
     R_overflow=1 if (a-b-1) < -128 or (a-b-1) > 127 else 0
+    cocotb.log.info(f"  -> [Esperado] Resta: {resta_real}, Overflow: {R_overflow} | [Obtenido DUT] Resta: {dut.arit_out.value}, Overflow: {dut.overflow_flag.value}")
     assert dut.arit_out.value == resta_real, f"Error en la resta: {a} - {b} = {resta_real}, pero dio {dut.arit_out.value}"
     assert dut.overflow_flag.value == R_overflow, f"Error en el Overflow Out, el esperado es {R_overflow}, pero dio {dut.overflow_out.value}"
     await Timer(50, unit='ns')
