@@ -26,7 +26,7 @@ async def test_arithmetic(dut):
     a_s = a - 256 if a > 127 else a
     b_s = b - 256 if b > 127 else b
     R_carry=0 if (a+b+c_in) <= 255 else 1 #calcular el carry real
-    R_overflow=1 if (a_s-b_s) < -128 or (a_s-b_s) > 127 else 0
+    R_overflow=1 if (a_s+b_s+c_in) < -128 or (a_s+b_s+c_in) > 127 else 0
     #Verificamos que la salida del DUT sea igual a la suma real
     cocotb.log.info(f"  -> [Esperado] Suma: {suma_real}, Carry: {R_carry} | [Obtenido DUT] Suma: {dut.arit_out.value}, Carry: {dut.carry_out.value}")
     assert dut.arit_out.value == suma_real, f"Error en la suma: {a} + {b} + {c_in} = {suma_real}, pero dio {dut.arit_out.value}"
@@ -50,7 +50,7 @@ async def test_arithmetic(dut):
     a_s = a - 256 if a > 127 else a
     b_s = b - 256 if b > 127 else b
     R_carry=0 if (a+b+c_in) <= 255 else 1
-    R_overflow=1 if (a_s-b_s) < -128 or (a_s-b_s) > 127 else 0
+    R_overflow=1 if (a_s+b_s+c_in) < -128 or (a_s+b_s+c_in) > 127 else 0
     cocotb.log.info(f"  -> [Esperado] Suma: {suma_real}, Carry: {R_carry} | [Obtenido DUT] Suma: {dut.arit_out.value}, Carry: {dut.carry_out.value}")
     assert dut.arit_out.value == suma_real, f"Error en la suma: {a} + {b} + {c_in} = {suma_real}, pero dio {dut.arit_out.value}"
     assert dut.overflow_flag.value == R_overflow, f"Error en el Overflow Out, el esperado es {R_overflow}, pero dio {dut.overflow_flag.value}"
