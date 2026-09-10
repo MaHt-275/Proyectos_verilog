@@ -95,7 +95,7 @@ async def test_arithmetic(dut):
         resta_real=(a-b-1) & 0xFF
         Ac=a&0xFF
         Bc=b&0xFF
-        R_carry=1 if Ac >= Bc else 0
+        R_carry=1 if Ac > Bc else 0
         R_overflow=1 if (a-b-1) < -128 or (a-b-1) > 127 else 0
         cocotb.log.info(f"  -> [Esperado] Resta: {resta_real}, Carry: {R_carry}, Overflow: {R_overflow} | [Obtenido DUT] Resta: {dut.arit_out.value}, Carry: {dut.carry_out.value}, Overflow: {dut.overflow_flag.value}")
         assert dut.arit_out.value == resta_real, f"Error en la resta: {a} - {b} = {resta_real}, pero dio {dut.arit_out.value}"
