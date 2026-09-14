@@ -5,14 +5,14 @@ from cocotb.triggers import Timer
 @cocotb.test() #Decorador para indicar que es un test
 async def test_alu_top(dut):
     """Test Para el modulo ALU Top"""#comentario de la funcion visible para Cocotb
-    await Timer(50, units='ns')
+    await Timer(50, unit='ns')
     for i in range(200):
         a=random.randint(0, 255)
         # ==========================================
         #          Testeo del desplazador
         # ==========================================
         cocotb.log.info("Testeo del desplazador")
-        await Timer(50, units='ns')
+        await Timer(50, unit='ns')
         n=0
         # ==========================================
         #      caso 1: Desplazamiento a la izquierda
@@ -29,7 +29,7 @@ async def test_alu_top(dut):
             dut.SHIFT_ARIT_RIGHT.value = 0
             dut.select.value = 0b00
 
-            await Timer(50, units='ns')
+            await Timer(50, unit='ns')
 
             cocotb.log.info(f"Desplazamiento a la izquierda {n} veces")
             assert dut.out.value == E_a, f"Error en desplazamiento izq {n}: esperado {E_a}, dio {dut.out.value}"
@@ -53,7 +53,7 @@ async def test_alu_top(dut):
             dut.SHIFT_ARIT_RIGHT.value = 0
             dut.select.value = 0b00
 
-            await Timer(50, units='ns')
+            await Timer(50, unit='ns')
 
             cocotb.log.info(f"Desplazamiento a la derecha {n} veces")
             assert dut.out.value == E_a, f"Error en desplazamiento der {n}: esperado {E_a}, dio {dut.out.value}"
@@ -78,7 +78,7 @@ async def test_alu_top(dut):
             dut.SHIFT_ARIT_RIGHT.value = 1
             dut.select.value = 0b00
 
-            await Timer(50, units='ns')
+            await Timer(50, unit='ns')
 
             cocotb.log.info(f"Desplazamiento a la derecha aritmetico {n} veces")
             assert dut.out.value == E_a, f"Error en desplazamiento aritmetico der {n}: esperado {E_a}, dio {dut.out.value}"
@@ -104,7 +104,7 @@ async def test_alu_top(dut):
         dut.carry_in.value=c_in #asignar valor a la entrada Carry_In
         dut.mod_sub.value=0 #asignar valor a la entrada mod_sub
         dut.select.value=0b01 #seleccionamos la operacion aritmetica
-        await Timer(10, units='ns') #esperar 10 ns para que se propague la señal
+        await Timer(10, unit='ns') #esperar 10 ns para que se propague la señal
         #Verificar la salida de la suma
         #calculamos la suma real
         suma_real=(a+b+c_in) & 0xFF #truncar a 8bits
@@ -121,7 +121,7 @@ async def test_alu_top(dut):
         assert dut.carry_out.value == R_carry, f"Error en el Carry Out, el esperado es {R_carry}, pero dio {dut.carry_out.value}"
         assert dut.zero_flag.value == R_zero, f"Error en el Zero Flag, el esperado es {R_zero}, pero dio {dut.zero_flag.value}"
         assert dut.negative_flag.value == R_negative, f"Error en el Negative Flag, el esperado es {R_negative}, pero dio {dut.negative_flag.value}"
-        await Timer(50, units='ns') 
+        await Timer(50, unit='ns') 
         # ==========================================
         # CASO 2: Suma aleatoria con Carry In = 0
         # ==========================================
@@ -135,7 +135,7 @@ async def test_alu_top(dut):
         dut.carry_in.value=c_in 
         dut.mod_sub.value=0
         dut.select.value=0b01 
-        await Timer(10, units='ns')
+        await Timer(10, unit='ns')
         suma_real=(a+b+c_in) & 0xFF
         a_s = a - 256 if a > 127 else a
         b_s = b - 256 if b > 127 else b
@@ -149,7 +149,7 @@ async def test_alu_top(dut):
         assert dut.carry_out.value == R_carry, f"Error en el Carry Out, el esperado es {R_carry}, pero dio {dut.carry_out.value}"
         assert dut.zero_flag.value == R_zero, f"Error en el Zero Flag, el esperado es {R_zero}, pero dio {dut.zero_flag.value}"
         assert dut.negative_flag.value == R_negative, f"Error en el Negative Flag, el esperado es {R_negative}, pero dio {dut.negative_flag.value}"
-        await Timer(50, units='ns')
+        await Timer(50, unit='ns')
         # ==========================================
         # CASO 3: resta aleatoria con Carry In = 1
         # ==========================================
@@ -163,7 +163,7 @@ async def test_alu_top(dut):
         dut.carry_in.value=c_in 
         dut.mod_sub.value=1
         dut.select.value=0b01
-        await Timer(10, units='ns') 
+        await Timer(10, unit='ns') 
         resta_real=(a-b) & 0xFF
         R_overflow=1 if (a-b) < -128 or (a-b) > 127 else 0
         Ac=a&0xFF
@@ -177,7 +177,7 @@ async def test_alu_top(dut):
         assert dut.overflow_flag.value == R_overflow, f"Error en el Overflow Out, el esperado es {R_overflow}, pero dio {dut.overflow_flag.value}"
         assert dut.zero_flag.value == R_zero, f"Error en el Zero Flag, el esperado es {R_zero}, pero dio {dut.zero_flag.value}"
         assert dut.negative_flag.value == R_negative, f"Error en el Negative Flag, el esperado es {R_negative}, pero dio {dut.negative_flag.value}"
-        await Timer(50, units='ns')
+        await Timer(50, unit='ns')
         # ==========================================
         # CASO 4: resta aleatoria con Carry In = 0
         # ==========================================
@@ -191,7 +191,7 @@ async def test_alu_top(dut):
         dut.carry_in.value=c_in 
         dut.mod_sub.value=1
         dut.select.value=0b01
-        await Timer(10, units='ns') 
+        await Timer(10, unit='ns') 
         resta_real=(a-b-1) & 0xFF
         Ac=a&0xFF
         Bc=b&0xFF
@@ -205,7 +205,7 @@ async def test_alu_top(dut):
         assert dut.overflow_flag.value == R_overflow, f"Error en el Overflow Out, el esperado es {R_overflow}, pero dio {dut.overflow_flag.value}"
         assert dut.zero_flag.value == R_zero, f"Error en el Zero Flag, el esperado es {R_zero}, pero dio {dut.zero_flag.value}"
         assert dut.negative_flag.value == R_negative, f"Error en el Negative Flag, el esperado es {R_negative}, pero dio {dut.negative_flag.value}"
-        await Timer(50, units='ns')
+        await Timer(50, unit='ns')
 
     for i in range(200):
         # ==========================================
@@ -221,7 +221,7 @@ async def test_alu_top(dut):
         dut.in_b.value=b
         dut.select.value=0b10 #seleccionamos modo logico
         dut.op.value=0b00 #seleccionamos operacion and
-        await Timer(10, units='ns')
+        await Timer(10, unit='ns')
         E_a = a & b
         R_zero=1 if E_a == 0 else 0
         R_negative=1 if (E_a >> 7) & 1 == 1 else 0
@@ -229,7 +229,7 @@ async def test_alu_top(dut):
         assert dut.out.value == E_a, f"Error en la operacion AND: {a} & {b} = {E_a}, pero dio {dut.out.value}"
         assert dut.zero_flag.value == R_zero, f"Error en el Zero Flag, el esperado es {R_zero}, pero dio {dut.zero_flag.value}"
         assert dut.negative_flag.value == R_negative, f"Error en el Negative Flag, el esperado es {R_negative}, pero dio {dut.negative_flag.value}"
-        await Timer(50, units='ns')
+        await Timer(50, unit='ns')
         # ==========================================
         #                caso or
         # ==========================================
@@ -239,7 +239,7 @@ async def test_alu_top(dut):
         dut.in_b.value=b
         dut.select.value=0b10 #seleccionamos modo logico
         dut.op.value=0b01 #seleccionamos operacion or
-        await Timer(10, units='ns')
+        await Timer(10, unit='ns')
         E_a = a | b
         R_zero=1 if E_a == 0 else 0
         R_negative=1 if (E_a >> 7) & 1 == 1 else 0
@@ -247,7 +247,7 @@ async def test_alu_top(dut):
         assert dut.out.value == E_a, f"Error en la operacion OR: {a} | {b} = {E_a}, pero dio {dut.out.value}"
         assert dut.zero_flag.value == R_zero, f"Error en el Zero Flag, el esperado es {R_zero}, pero dio {dut.zero_flag.value}"
         assert dut.negative_flag.value == R_negative, f"Error en el Negative Flag, el esperado es {R_negative}, pero dio {dut.negative_flag.value}"
-        await Timer(50, units='ns')
+        await Timer(50, unit='ns')
         # ==========================================
         #                caso Xor
         # ==========================================
@@ -257,7 +257,7 @@ async def test_alu_top(dut):
         dut.in_b.value=b
         dut.select.value=0b10 #seleccionamos modo logico
         dut.op.value=0b10 #seleccionamos operacion xor
-        await Timer(10, units='ns')
+        await Timer(10, unit='ns')
         E_a = a ^ b
         R_zero=1 if E_a == 0 else 0
         R_negative=1 if (E_a >> 7) & 1 == 1 else 0
@@ -265,7 +265,7 @@ async def test_alu_top(dut):
         assert dut.out.value == E_a, f"Error en la operacion XOR: {a} ^ {b} = {E_a}, pero dio {dut.out.value}"
         assert dut.zero_flag.value == R_zero, f"Error en el Zero Flag, el esperado es {R_zero}, pero dio {dut.zero_flag.value}"
         assert dut.negative_flag.value == R_negative, f"Error en el Negative Flag, el esperado es {R_negative}, pero dio {dut.negative_flag.value}"
-        await Timer(50, units='ns')
+        await Timer(50, unit='ns')
         # ==========================================
         #                caso Not
         # ==========================================
@@ -273,7 +273,7 @@ async def test_alu_top(dut):
         dut.in_a.value = a
         dut.select.value = 0b10       # modo lógico
         dut.op.value = 0b11           # operación NOT
-        await Timer(10, units='ns')
+        await Timer(10, unit='ns')
         E_a = (~a) & 0xFF
         R_zero = 1 if E_a == 0 else 0
         R_negative = 1 if (E_a >> 7) & 1 == 1 else 0
@@ -281,7 +281,7 @@ async def test_alu_top(dut):
         assert dut.out.value == E_a, f"Error en la operacion NOT: ~{a} = {E_a}, pero dio {dut.out.value}"
         assert dut.zero_flag.value == R_zero, f"Error en el Zero Flag, el esperado es {R_zero}, pero dio {dut.zero_flag.value}"
         assert dut.negative_flag.value == R_negative, f"Error en el Negative Flag, el esperado es {R_negative}, pero dio {dut.negative_flag.value}"
-        await Timer(50, units='ns')
+        await Timer(50, unit='ns')
 
     for i in range(200):
         # ==========================================
@@ -291,7 +291,7 @@ async def test_alu_top(dut):
         
         dut.in_a.value = a
         dut.select.value = 0b11       # modo bypass
-        await Timer(10, units='ns')
+        await Timer(10, unit='ns')
         E_a = a
         R_zero = 1 if E_a == 0 else 0
         R_negative = 1 if (E_a >> 7) & 1 == 1 else 0
@@ -299,4 +299,4 @@ async def test_alu_top(dut):
         assert dut.out.value == E_a, f"Error en bypass: esperado {E_a}, dio {dut.out.value}"
         assert dut.zero_flag.value == R_zero, f"Error en el Zero Flag, el esperado es {R_zero}, pero dio {dut.zero_flag.value}"
         assert dut.negative_flag.value == R_negative, f"Error en el Negative Flag, el esperado es {R_negative}, pero dio {dut.negative_flag.value}"
-        await Timer(50, units='ns')
+        await Timer(50, unit='ns')
