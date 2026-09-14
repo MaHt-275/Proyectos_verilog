@@ -1,4 +1,4 @@
-module decoder 
+module decoder_alu 
 (
     // entrada
     input wire [7:0] in,
