@@ -27,11 +27,11 @@ module barrel_shifter (
 	else begin
 
             
-            OUT_BUS_8bits=	SHIFT_ARIT_RIGHT
-                             		? ($signed(IN_A_BUS_8bits) >>> shift_amount)
-                             		: (IN_A_BUS_8bits >> shift_amount);
-
-            Carry_flag=		IN_A_BUS_8bits[shift_amount - 1];
+        if (SHIFT_ARIT_RIGHT)
+            OUT_BUS_8bits = $signed(IN_A_BUS_8bits) >>> shift_amount;
+            else
+            OUT_BUS_8bits = IN_A_BUS_8bits >> shift_amount;
+            Carry_flag = IN_A_BUS_8bits[shift_amount - 1];
         end
 
     end

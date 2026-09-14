@@ -15,10 +15,12 @@ VERILOG_SOURCES = ../RTL/arithmetic.v\
 #iniciar la conexion con los TB
 TOPLEVEL ?= alu_top #el ?= indica que no es un valor fijo, de esta manera puedo cambiarlo desde la linea de comandos si quiero
 COCOTB_TEST_MODULES ?= test_alu_top
-
+LOGFILE ?= resultado_test.log
 #digo que usare cocotb para la simulacion y que busque el makefile de cocotb en la carpeta donde se instalo
 include $(shell cocotb-config --makefiles)/Makefile.sim 
-
+.PHONY: log
+log:
+	@bash -o pipefail -c '$(MAKE) 2>&1 | tee $(LOGFILE)'
 #NOTAS: Usar make TOPLEVEL=modulo a probar COCOTB_TEST_MODULES= TB del modulo a probar
 #de esta forma este Makefile es generico para el proyecto
 #===========================================================================#
