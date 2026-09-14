@@ -11,10 +11,11 @@ TOPLEVEL_LANG ?= verilog
 VERILOG_SOURCES = ../RTL/arithmetic.v\
                   ../RTL/logic.v\
                   ../RTL/barrel_shifter.v\
-                  ../RTL/alu_top.v
+                  ../RTL/alu_top.v\
+                  ../RTL/decoder_alu.v
 #iniciar la conexion con los TB
-TOPLEVEL ?= alu_top #el ?= indica que no es un valor fijo, de esta manera puedo cambiarlo desde la linea de comandos si quiero
-COCOTB_TEST_MODULES ?= test_alu_top
+TOPLEVEL ?= decoder_alu #el ?= indica que no es un valor fijo, de esta manera puedo cambiarlo desde la linea de comandos si quiero
+COCOTB_TEST_MODULES ?= test_decoder_alu
 LOGFILE ?= resultado_test.log
 #digo que usare cocotb para la simulacion y que busque el makefile de cocotb en la carpeta donde se instalo
 include $(shell cocotb-config --makefiles)/Makefile.sim 
